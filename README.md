@@ -4,7 +4,6 @@
 
 A Go-based API rate limiter that uses the **Token Bucket algorithm** to enforce per-user, per-endpoint quotas. The service exposes a **gRPC unary RPC**, stores shared bucket state in **DynamoDB**, and uses **conditional writes** to protect token updates under concurrent traffic. A lightweight browser dashboard lets users generate clients, send requests, and visualize allow/deny decisions.
 
-> **Project scope:** Local development with DynamoDB Local. Multi-server operation is a validation scenario, not the primary purpose. Performance numbers and production readiness are not claimed.
 
 ## 1. Problem & Solution
 
