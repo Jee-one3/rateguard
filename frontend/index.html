@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>API Rate Limiter Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+            <h1>API Rate Limiter Dashboard</h1>
+            <p>
+                Interactive API rate limiting using
+                Go, gRPC and DynamoDB
+            </p>
+        </header>
+
+        <!-- User generation controls -->
+        <section class="panel">
+
+            <h2>Configure Users</h2>
+
+            <div class="controls">
+                <div class="input-group">
+                    <label for="userCount">
+                        Number of Users
+                    </label>
+
+                    <input
+                        id="userCount"
+                        type="number"
+                        min="1"
+                        max="20"
+                        value="4"
+                    >
+                </div>
+
+                <button id="generateBtn">
+                    Generate Users
+                </button>
+            </div>
+
+            <p class="hint">
+                Each user has an independent rate limit:
+                5 tokens maximum, refilling at 1 token
+                per second.
+            </p>
+
+        </section>
+
+        <!-- Request statistics -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>Total Requests</span>
+                <strong id="totalRequests">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Allowed</span>
+                <strong id="allowedRequests" class="green">
+                    0
+                </strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Denied</span>
+                <strong id="deniedRequests" class="red">
+                    0
+                </strong>
+            </div>
+
+        </section>
+
+        <!-- Live analytics -->
+        <section class="panel">
+            <div class="section-header">
+                <h2>Live Request Analytics</h2>
+                <span>Current dashboard session</span>
+            </div>
+
+            <div class="analytics-row">
+                <span>Allowed</span>
+                <div class="analytics-track">
+                    <div id="allowedBar"
+                         class="analytics-fill allowed-fill"></div>
+                </div>
+                <strong id="allowedPercentage">0%</strong>
+            </div>
+
+            <p class="hint">
+                The chart updates using actual responses from
+                the Go gRPC rate limiter.
+            </p>
+        </section>
+
+        <!-- Dynamically generated users -->
+        <section class="panel">
+
+            <div class="section-header">
+                <h2>Active Users</h2>
+                <span id="activeUserCount">0 users</span>
+            </div>
+
+            <div id="usersContainer" class="users-grid">
+            </div>
+
+        </section>
+
+        <!-- Recent request history -->
+        <section class="panel">
+
+            <div class="section-header">
+                <h2>Request History</h2>
+
+                <button id="clearLogsBtn" class="secondary-btn">
+                    Clear History
+                </button>
+            </div>
+
+            <div id="requestLogs" class="request-logs">
+                <p class="empty-message">
+                    No requests made yet.
+                </p>
+            </div>
+
+        </section>
+
+        <footer>
+            Built with Go, gRPC, DynamoDB,
+            HTML, CSS and JavaScript
+        </footer>
+
+    </main>
+
+</body>
+</html>

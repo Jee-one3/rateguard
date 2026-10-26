@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package ratelimiter;
+
+option go_package = "example.com/grpc-rate-limiter/generated;ratepb";
+
+service RateLimiterService {
+  rpc CheckLimit(CheckLimitRequest)
+      returns (CheckLimitResponse);
+}
+
+message CheckLimitRequest {
+  string user_id = 1;
+  string endpoint = 2;
+}
+
+message CheckLimitResponse {
+  bool allowed = 1;
+  int32 remaining_tokens = 2;
+  int64 retry_after_ms = 3;
+}
